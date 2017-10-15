@@ -7,7 +7,7 @@
 
 module.exports = {
 	index: function(req, res) {
-        res.sendfile(sails.config.globals.entry + '/index.html');
+        res.sendfile(sails.config.paths.public + '/index.html');
     }
 };
 

@@ -11,6 +11,14 @@
  */
 
 module.exports = {
+  
+  /***************************************************************************
+   * Path to the public folder
+   * Can be accessed as sails.config.paths.public
+   ***************************************************************************/
+  paths: {
+    public: __dirname + '/../../views/dist' // or wherever
+  },
 
   /***************************************************************************
    * Set the default database connection for models in the development       *

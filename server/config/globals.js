@@ -10,12 +10,6 @@
  */
 module.exports.globals = {
 
-  /***************************************************************************
-   * Path to the public folder
-   * Can be accessed as sails.config.globals.entry
-   ***************************************************************************/
-  entry: __dirname + '/../views/dist' // or wherever,
-
   /****************************************************************************
   *                                                                           *
   * Expose the lodash installed in Sails core as a global variable. If this   *
