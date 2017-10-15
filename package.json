@@ -2,6 +2,10 @@
   "name": "angular-sails-starter",
   "version": "0.0.0",
   "license": "MIT",
+  "engines": {
+    "node": "6.9.5",
+    "npm": "4.6.1"
+  },
   "scripts": {
     "ng": "ng",
     "start": "cd server && npm i && node app.js",

@@ -25,8 +25,13 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMongodbServer'
-  // }
+  models: {
+    connection: 'mongodTestEnv'
+  },
+
+  session: {
+    adapter: 'connect-mongo',
+    url: process.env.MONGODB_URI
+  }
 
 };
