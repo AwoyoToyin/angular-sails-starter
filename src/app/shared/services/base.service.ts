@@ -15,7 +15,7 @@ export class BaseService {
 
     protected API_PATH = '';
 
-    constructor(private http: Http) { }
+    constructor(protected http: Http) { }
 
     /**
      * Creates a record

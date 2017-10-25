@@ -1,0 +1,50 @@
+<div class="row">
+
+  <div class="col-4">
+    <h2>Github Followers</h2>
+    <form #f="ngForm" (ngSubmit)="search(f.control)">
+      <div class="form-group">
+        <input 
+          type="text" 
+          class="form-control" 
+          aria-describedby="searchHelp" 
+          placeholder="Enter github account name" 
+          required 
+          [(ngModel)]="username" 
+          name="username" 
+          #name="ngModel">
+        <small id="searchHelp" class="form-text text-muted">Enter github account name.</small>
+        Search for: {{username}}
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+          Enter a valid Github username
+        </div>
+      </div>
+      <button type="submit" class="btn btn-light btn-block" [disabled]="!f.form.valid">Get Followers</button>
+    </form>
+  </div>
+
+  <div class="col">
+    <div class="row">
+      <ng-container *ngIf="followers.length > 0; else notFound">
+        <ng-container *ngFor="let follower of followers; let i = index">
+          <div class="col">
+            <div class="card">
+              <img class="card-img-top" [src]="follower.avatar_url" alt="avatar">
+              <div class="card-body">
+                <h4 class="card-title">{{follower.login}}</h4>
+                <p class="card-text">
+                  <a href="follower.html_url">{{follower.html_url}}</a>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+        </ng-container>
+      </ng-container>
+      <ng-template #notFound>
+        <p class="text-center text-muted not-found">No followers found for the given user</p>
+      </ng-template>
+    </div>
+  </div>
+
+</div>

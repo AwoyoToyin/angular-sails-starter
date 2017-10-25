@@ -1,11 +1,11 @@
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.router';
-import { AppErrorHandler } from './shared/app-error-handler';
 import { BaseService } from './shared/services/base.service';
+import { appErrorProvider, SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -14,10 +14,11 @@ import { BaseService } from './shared/services/base.service';
   imports: [
     BrowserModule,
     HttpModule,
+    SharedModule,
     routing
   ],
   providers: [
-    { provide: ErrorHandler, useClass: AppErrorHandler },
+    appErrorProvider,
     BaseService
   ],
   bootstrap: [AppComponent]

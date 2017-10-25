@@ -29,9 +29,9 @@ module.exports = {
     connection: 'mongodTestEnv'
   },
 
-  session: {
-    adapter: 'connect-mongo',
-    url: process.env.MONGODB_URI
-  }
+  // session: {
+  //   adapter: 'connect-mongo',
+  //   url: process.env.MONGODB_URI
+  // }
 
 };

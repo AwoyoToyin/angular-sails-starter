@@ -26,12 +26,12 @@ module.exports = {
    ***************************************************************************/
 
   models: {
-    connection: 'mongodTestEnv'
+    connection: 'localDiskDb'
   },
 
-  session: {
-    adapter: 'connect-mongo',
-    url: process.env.MONGODB_URI
-  }
+  // session: {
+  //   adapter: 'connect-mongo',
+  //   url: process.env.MONGODB_URI
+  // }
 
 };
