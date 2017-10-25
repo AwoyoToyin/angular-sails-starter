@@ -1,12 +1,14 @@
-import { AppError } from './../shared/errors/app-error';
-import { NotFoundError } from './../shared/errors/not-found-error';
-import { BadInputError } from './../shared/errors/bad-input-error';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
+
+import { AppError } from '../errors/app-error';
+import { BadInputError } from '../errors/bad-input-error';
+import { NotFoundError } from '../errors/not-found-error';
 
 @Injectable()
 export class BaseService {
