@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from './../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { FollowersComponent } from './components/followers/followers.component';
 import { githubRouter } from './github.router';
-import { FollowersService } from './services/followers.service';
 
 @NgModule({
   imports: [
@@ -13,8 +12,6 @@ import { FollowersService } from './services/followers.service';
   declarations: [
     FollowersComponent
   ],
-  providers: [
-    FollowersService
-  ]
+  providers: []
 })
 export class GithubModule { }

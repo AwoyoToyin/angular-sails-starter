@@ -3,7 +3,9 @@ import 'rxjs/add/operator/switchMap';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Store } from '@ngrx/store';
+import { GetUserFollowersAction } from '@store/github/github.actions';
+import { followers, IAppState } from '@store/index';
 import { Subscription } from 'rxjs/Subscription';
 
 import { FollowersService } from '../../services/followers.service';
@@ -23,7 +25,9 @@ export class FollowersComponent implements OnInit, OnDestroy {
   constructor(
     private service: FollowersService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private store: Store<IAppState>
+  ) { }
 
   ngOnInit() {
     this.getFollowers();
@@ -33,12 +37,22 @@ export class FollowersComponent implements OnInit, OnDestroy {
    * Sends a request to fetch a list of all searched user followers
    */
   getFollowers() {
-    this.subscription = this.route.queryParams.switchMap(params => {
+    // dispatches a store event
+    this.subscription = this.route.queryParams.subscribe(params => {
       if (params['username']) {
         if (!this.username) { this.username = params['username']; }
-        return this.service.getFollowers(params['username']);
+        this.store.dispatch(new GetUserFollowersAction(params['username']));
       }
-    }).subscribe(followers => this.followers = followers);
+    });
+
+    // select and subscribe to the followers from the store
+    const subscription = this.store.select(followers)
+      .subscribe(followers => {
+        console.log(followers);
+        this.followers = followers;
+      });
+
+    this.subscription.add(subscription);
   }
 
   /**
