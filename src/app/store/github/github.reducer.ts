@@ -1,6 +1,8 @@
 import { IGithub } from './github.reducer';
 import { Actions, ActionTypes } from './github.actions';
 
+import { tassign } from 'tassign';
+
 export interface IGithub {
     followers: any[];
 }
@@ -14,9 +16,7 @@ export function githubReducer(state: IGithub = initialState, action: Actions): I
 
         case ActionTypes.GET_FOLLOWERS_SUCCESS:
 
-            return Object.assign({}, state, {
-                    followers: action.payload
-                });
+            return tassign(state, { followers: action.payload });
 
         default:
             return state;
