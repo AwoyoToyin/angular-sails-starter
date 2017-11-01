@@ -1,0 +1,54 @@
+.alert {
+    width: 350px;
+    padding: .7rem;
+    position: absolute;
+    z-index: 99999999999;
+}
+.top-right {
+    right: 20px;
+}
+.bottom-right {
+    right: 20px;
+    bottom: 0;
+}
+.top-left {
+    left: 20px;
+}
+.bottom-left {
+    left: 20px;
+    bottom: 0;
+}
+.close {
+    font-size: 1.2rem;
+    font-weight: 400;
+    outline: none;
+    position: absolute;
+    top: .7rem;
+    right: .7rem;
+    cursor: pointer;
+}
+h5 {
+    margin-bottom: 3px;
+}
+p {
+    font-weight: 300;
+    font-size: .9rem;
+}
+.progress {
+    height: 5px;
+}
+
+@media (max-width: 425px) {
+    .alert {
+        position: fixed;
+        width: 100%;
+        right: 0;
+    }
+    .top-right, .top-left {
+        top: 56px;
+    }
+    .bottom-left, .bottom-right {
+        left: 0;
+        bottom: 0;
+    }
+}

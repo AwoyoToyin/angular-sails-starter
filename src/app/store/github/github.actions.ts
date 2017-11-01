@@ -1,3 +1,4 @@
+import { Github } from '@github/models/github.model';
 import { Action } from '@ngrx/store';
 
 export const ActionTypes = {
@@ -15,7 +16,7 @@ export class GetUserFollowersAction implements Action {
 export class GetUserFollowersSuccessAction implements Action {
     readonly type: string = ActionTypes.GET_FOLLOWERS;
 
-    constructor(public payload: object) {}
+    constructor(public payload: Github | any) {}
 }
 
 export class GetUserFollowersFailedAction implements Action {

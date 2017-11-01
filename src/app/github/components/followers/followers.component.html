@@ -25,25 +25,27 @@
 
   <div class="col">
     <div class="row">
-      <ng-container *ngIf="followers.length > 0; else notFound">
-        <ng-container *ngFor="let follower of followers; let i = index">
-          <div class="col">
-            <div class="card">
-              <img class="card-img-top" [src]="follower.avatar_url" alt="avatar">
-              <div class="card-body">
-                <h4 class="card-title">{{follower.login}}</h4>
-                <p class="card-text">
-                  <a href="follower.html_url">{{follower.html_url}}</a>
-                </p>
+      <ng-container *ngIf="github$ | async as github">
+        <ng-container *ngIf="github.totalFollowersCount > 0; else notFound">
+          <ng-container *ngFor="let follower of github.followers; let i = index">
+            <div class="col">
+              <div class="card">
+                <img class="card-img-top" [src]="follower.avatar_url" alt="avatar">
+                <div class="card-body">
+                  <h4 class="card-title">{{follower.login}}</h4>
+                  <p class="card-text">
+                    <a href="follower.html_url">{{follower.html_url}}</a>
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+            <div *ngIf="(i + 1) % 2 === 0" class="w-100"></div>
+          </ng-container>
         </ng-container>
+        <ng-template #notFound>
+          <p class="text-center text-muted not-found">No followers found for the given user</p>
+        </ng-template>
       </ng-container>
-      <ng-template #notFound>
-        <p class="text-center text-muted not-found">No followers found for the given user</p>
-      </ng-template>
     </div>
   </div>
 

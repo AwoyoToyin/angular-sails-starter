@@ -64,7 +64,7 @@ export class BaseService {
             .catch(this.handleError);
     }
 
-    private handleError(error: Response): Observable<AppError> {
+    protected handleError(error: Response): Observable<AppError> {
         if (error.status === 400) { return Observable.throw(new BadInputError(error.json())); }
 
         if (error.status === 404) { return Observable.throw(new NotFoundError()); }

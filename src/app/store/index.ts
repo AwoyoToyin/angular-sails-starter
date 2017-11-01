@@ -5,21 +5,24 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 
 import { environment } from '../../environments/environment';
+import { bsNoticeReducer, getBsNotice, IBsNotice } from './bs-notify/bs-notify.reducer';
 import { GithubEffects } from './github/github.effects';
-import { githubReducer, IGithub } from './github/github.reducer';
+import { getFollowers, githubReducer, IGithub } from './github/github.reducer';
 
 export interface IAppState {
     github: IGithub;
+    bsNotice: IBsNotice;
 }
 
 const reducers: ActionReducerMap<IAppState> = {
-    github: githubReducer
+    github: githubReducer,
+    bsNotice: bsNoticeReducer
 };
 
 export function logger(reducer: ActionReducer<IAppState>): ActionReducer<any, any> {
     return function (state: IAppState, action: any): IAppState {
-        console.log('state', state);
-        console.log('action', action);
+        // console.log('state', state);
+        // console.log('action', action);
 
         return reducer(state, action);
     };
@@ -57,5 +60,14 @@ export const effects: ModuleWithProviders = EffectsModule.forRoot([
  * }
  * ```
  */
+/**
+ * Github
+ */
 export const selectGithubState = (state: IAppState) => state.github;
-export const followers = createSelector(selectGithubState, (state: IGithub) => state.followers);
+export const followers = createSelector(selectGithubState, getFollowers);
+
+/**
+ * BS Notify
+ */
+export const selectBsNoticeState = (state: IAppState) => state.bsNotice;
+export const bsNotice = createSelector(selectBsNoticeState, getBsNotice);

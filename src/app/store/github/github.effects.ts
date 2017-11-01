@@ -14,7 +14,6 @@ export class GithubEffects {
         .ofType(actions.ActionTypes.GET_FOLLOWERS)
         .map(toPayload)
         .switchMap(payload => {
-            console.log('payload -- ', payload);
             return this.service.getFollowers(payload)
                 .map((followers) => new actions.GetUserFollowersSuccessAction(followers));
                 // .catch((error) => Observable.of(new actions.GetUserFollowersFailedAction(error)));

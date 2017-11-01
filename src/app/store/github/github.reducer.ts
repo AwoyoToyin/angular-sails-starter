@@ -1,10 +1,10 @@
-import { IGithub } from './github.reducer';
-import { Actions, ActionTypes } from './github.actions';
-
+import { GithubFollower } from '@github/models/follower/follower.model';
 import { tassign } from 'tassign';
 
+import { Actions, ActionTypes } from './github.actions';
+
 export interface IGithub {
-    followers: any[];
+    followers: GithubFollower[];
 }
 
 const initialState: IGithub = {
@@ -23,4 +23,4 @@ export function githubReducer(state: IGithub = initialState, action: Actions): I
     }
 }
 
-export const followers = (state: IGithub) => state.followers;
+export const getFollowers = (state: IGithub) => state.followers;

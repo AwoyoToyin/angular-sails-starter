@@ -1,0 +1,20 @@
+<!-- <ng-container *ngIf="(notice$ | async) as notice"> -->
+    <div *ngIf="show" 
+        [class]="'alert alert-' + notice.type" 
+        [ngClass]="notice.placement" role="alert">
+        <h5 *ngIf="notice.title" class="alert-heading">{{ notice.title }}</h5>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <p>{{ notice.message }}</p>
+        <ng-container *ngIf="notice.additional">
+            <hr>
+            <p class="mb-0">{{ notice.additional }}</p>
+        </ng-container>
+
+        <!-- Progress bar -->
+        <div class="progress">
+            <div [class]="'progress-bar progress-bar-striped progress-bar-animated bg-' + notice.type" role="progressbar" [ngStyle]="{width: percent + '%'}" [attr.aria-valuenow]="percent" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+<!-- </ng-container> -->
