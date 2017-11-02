@@ -11,7 +11,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:prefx": "ack-angular-fx --out ./src/prefx.ts",
+    "build-prod": "ng build --prod --aot",
+    "deploy-prod": "npm run build:prefx && npm run build-prod"
   },
   "private": true,
   "dependencies": {
@@ -27,6 +30,7 @@
     "@ngrx/effects": "^4.1.0",
     "@ngrx/store": "^4.1.0",
     "@ngrx/store-devtools": "^4.0.0",
+    "ack-angular-fx": "^1.2.6",
     "bootstrap": "^4.0.0-beta.2",
     "core-js": "^2.4.1",
     "ngrx-store-freeze": "^0.2.0",
