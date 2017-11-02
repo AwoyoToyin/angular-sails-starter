@@ -8,12 +8,7 @@ export interface BsNotice {
     position?: string;
     url_target?: string;
     allow_dismiss?: boolean;
-    newest_on_top?: boolean;
     showProgressbar?: boolean;
     placement?: string;
-    animate?: {
-        enter: string,
-        exit: string
-    };
     delay?: number;
 }

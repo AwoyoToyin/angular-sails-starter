@@ -1,4 +1,3 @@
-import { ActionReducer } from '@ngrx/store';
 import { BsNotice } from '@shared/models/bs-notify/bs-notify.interface';
 import { tassign } from 'tassign';
 
@@ -16,14 +15,9 @@ const initialState: IBsNotice = {
         title: '',
         message: '',
         placement: 'top-right',
-        animate: {
-            enter: 'animated zoomInDown',
-            exit: 'animated zoomOutUp'
-        },
         allow_dismiss: true,
-        newest_on_top: true,
-        showProgressbar: false,
-        delay: 0
+        showProgressbar: true,
+        delay: 10000
     },
 };
 

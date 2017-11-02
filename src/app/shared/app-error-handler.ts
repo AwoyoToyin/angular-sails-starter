@@ -14,17 +14,16 @@ export class AppErrorHandler implements ErrorHandler {
     private icon = 'fa fa-exclamation-triangle';
     public placement = 'top-right';
     private allow_dismiss = true;
-    private newest_on_top = true;
     public showProgressbar = true;
-    public delay = 7000;
+    public delay = 10000;
 
     constructor(private store: Store<IAppState>) {}
 
-    handleError(error?: AppError): void {
+    handleError(error: AppError): void {
         const originalError = error.originalError;
         if (error instanceof NotFoundError) {
             this.message = originalError ? originalError.message : 'Resource not found';
-            this.type = 'danger';
+            // this.type = 'danger';
         }
 
         this.notify();

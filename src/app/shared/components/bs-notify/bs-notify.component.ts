@@ -3,27 +3,35 @@ import 'rxjs/add/observable/timer';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/takeUntil';
 
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BsNotice } from '@shared/models/bs-notify/bs-notify.interface';
 import { bsNotice } from '@store/index';
 import { IAppState } from '@store/index';
 import { Observable } from 'rxjs/Observable';
 
+import { fxArray } from '../../../../prefx';
+
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // tslint:disable-next-line:component-selector
   selector: 'bs-notify',
   templateUrl: './bs-notify.component.html',
   styleUrls: ['./bs-notify.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  animations: [
+    fxArray
+  ]
 })
-export class BsNotifyComponent implements OnInit, OnDestroy {
+export class BsNotifyComponent implements OnInit {
 
   /** The current notify options */
-  notice$: Observable<BsNotice>;
   notice: BsNotice;
-  show = true;
-  public percent = 0;
+
+  show = false; // show or hide notification
+
+  percent = 0; // holds current progress value
+
+  animationStyle = 'zoomInDown';
 
   constructor(
     private store: Store<IAppState>,
@@ -38,7 +46,10 @@ export class BsNotifyComponent implements OnInit, OnDestroy {
     this.store.select(bsNotice)
       .switchMap((notice) => {
         this.percent = 0; // reset percent progress
+
         this.notice = notice;
+
+        this.setAnimationStyle();
 
         this.canShow();
 
@@ -63,7 +74,7 @@ export class BsNotifyComponent implements OnInit, OnDestroy {
         this.close();
       } else if (this.percent < 100) {
         this.percent = +(100 * counter / max).toFixed(2);
-        // do a local check every second
+        // do a local change  check every second
         this.cdRef.detectChanges();
       }
     }
@@ -75,14 +86,25 @@ export class BsNotifyComponent implements OnInit, OnDestroy {
       }
   }
 
+  private setAnimationStyle() {
+    switch (this.notice.placement) {
+      case 'top-left':
+        this.animationStyle = 'zoomInRight';
+        break;
+
+      case 'top-right':
+        this.animationStyle = 'zoomInLeft';
+        break;
+
+      default:
+        this.animationStyle = 'zoomInDown';
+        break;
+    }
+  }
+
   close() {
     this.show = false;
     this.cdRef.detectChanges();
-    this.cdRef.reattach();
-  }
-
-  ngOnDestroy() {
-    console.log('destroy');
-    // this.cdRef.reattach();
+    this.cdRef.reattach(); // reattaches the change detection mechanism
   }
 }

@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /server/views/dist
+/src/prefx.ts
 
 # dependencies
 /node_modules
