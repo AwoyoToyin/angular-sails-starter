@@ -1,7 +1,7 @@
-import { BsNotice } from '@shared/models/bs-notify/bs-notify.interface';
 import { tassign } from 'tassign';
 
 import { Actions, ActionTypes } from './bs-notify.actions';
+import { BsNotice } from './bs-notify.interface';
 
 export interface IBsNotice {
     notice: BsNotice;
@@ -34,4 +34,4 @@ export function bsNoticeReducer(state: IBsNotice = initialState, action: Actions
     }
 }
 
-export const getBsNotice = (state: IBsNotice) => state.notice;
+// export const getBsNotice = (state: IBsNotice) => state.notice;

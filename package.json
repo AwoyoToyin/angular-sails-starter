@@ -9,7 +9,7 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test -sm=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:prefx": "ack-angular-fx --out ./src/prefx.ts",
@@ -37,7 +37,6 @@
     "ngx-bootstrap": "^1.9.3",
     "rxjs": "^5.4.2",
     "tassign": "^1.0.0",
-    "typescript": "~2.3.3",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.14"
   },
@@ -59,6 +58,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
-    "tslint": "~5.3.2"
+    "tslint": "~5.3.2",
+    "typescript": "~2.3.3"
   }
 }

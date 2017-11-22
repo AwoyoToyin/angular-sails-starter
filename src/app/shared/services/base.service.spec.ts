@@ -1,22 +1,20 @@
-import { Github } from '@github/models/github.model';
-import { inject, TestBed, fakeAsync } from '@angular/core/testing';
-import { HttpModule } from '@angular/http';
+import { fakeAsync, TestBed } from '@angular/core/testing';
 import { BaseRequestOptions, Http, Response, ResponseOptions } from '@angular/http';
 import { MockBackend } from '@angular/http/testing';
 import { AppError } from '@shared/errors/app-error';
 import { collection } from '@test/data';
 
-import { FollowersService } from './followers.service';
+import { BaseService } from './base.service';
 
-describe('FollowersService', () => {
-  let service: FollowersService;
+describe('BaseService', () => {
+  let service: BaseService;
   let backend: MockBackend;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [
-        FollowersService,
+        BaseService,
         MockBackend,
         BaseRequestOptions,
         {
@@ -31,23 +29,24 @@ describe('FollowersService', () => {
     // Get the MockBackend
     backend = TestBed.get(MockBackend);
     // Returns a service with the MockBackend so we can test with dummy responses
-    service = TestBed.get(FollowersService);
+    service = TestBed.get(BaseService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return a collection of followers from the server', fakeAsync(() => {
+  it('should return a collection of data from the server', fakeAsync(() => {
     getFakeResponse(collection);
 
-    service.getFollowers('awoyotoyin').subscribe(
-      result => expect(result).toEqual(new Github(collection)),
+    service.read().subscribe(
+      result => expect(result).toEqual(collection),
       error => expect(error).toBeUndefined()
     );
+
   }));
 
-  it('should throw an error trying to return a collection of followers from the server', fakeAsync(() => {
+  it('should throw an error trying to return a collection of data from the server', fakeAsync(() => {
     getFakeErrorResponse();
 
     service.read().subscribe(
@@ -72,5 +71,4 @@ describe('FollowersService', () => {
       connection.mockRespond(new AppError());
     });
   }
-
 });

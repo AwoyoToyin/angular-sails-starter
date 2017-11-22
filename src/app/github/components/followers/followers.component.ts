@@ -5,8 +5,6 @@ import { AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GithubFollower } from '@github/models/follower/follower.model';
 import { Github } from '@github/models/github.model';
-import { Store } from '@ngrx/store';
-import { followers, IAppState } from '@store/index';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -28,8 +26,7 @@ export class FollowersComponent implements OnInit, OnDestroy {
   constructor(
     private service: FollowersService,
     private router: Router,
-    private route: ActivatedRoute,
-    private store: Store<IAppState>
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -43,25 +40,9 @@ export class FollowersComponent implements OnInit, OnDestroy {
     this.subscription = this.route.queryParams.subscribe(params => {
       if (params['username']) {
         if (!this.username) { this.username = params['username']; }
-        this.github$ =  this.service.getFollowers(params['username']);
+        this.github$ = this.service.getFollowers(params['username']);
       }
     });
-    // dispatches a store event
-    // this.subscription = this.route.queryParams.subscribe(params => {
-    //   if (params['username']) {
-    //     if (!this.username) { this.username = params['username']; }
-    //     this.store.dispatch(new GetUserFollowersAction(params['username']));
-    //   }
-    // });
-
-    // // select and subscribe to the followers from the store
-    // const subscription = this.store.select(followers)
-    //   .subscribe(followers => {
-    //     console.log(followers);
-    //     this.followers = followers;
-    //   });
-
-    // this.subscription.add(subscription);
   }
 
   /**
@@ -74,7 +55,9 @@ export class FollowersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 }

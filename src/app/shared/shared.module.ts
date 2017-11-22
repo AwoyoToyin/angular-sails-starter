@@ -4,31 +4,30 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IAppState } from '@store/index';
-// import { AlertModule } from 'ngx-bootstrap';
-// import { ProgressbarModule } from 'ngx-bootstrap';
 
 import { AppErrorHandler } from './app-error-handler';
 import { BsNavbarComponent } from './components/bs-navbar/bs-navbar.component';
 import { BsNotifyComponent } from './components/bs-notify/bs-notify.component';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    // AlertModule,
-    // ProgressbarModule
   ],
   declarations: [
-    BsNavbarComponent,
-    BsNotifyComponent
+    LoaderComponent,
+    BsNotifyComponent,
+    BsNavbarComponent
   ],
   exports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    BsNavbarComponent,
-    BsNotifyComponent
+    LoaderComponent,
+    BsNotifyComponent,
+    BsNavbarComponent
   ]
 })
 export class SharedModule { }

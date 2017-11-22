@@ -1,22 +1,25 @@
 import { ModuleWithProviders } from '@angular/core';
+import { environment } from '@environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { ActionReducer, ActionReducerMap, createSelector, MetaReducer, StoreModule } from '@ngrx/store';
+import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import { environment } from '../../environments/environment';
-import { bsNoticeReducer, getBsNotice, IBsNotice } from './bs-notify/bs-notify.reducer';
+import { bsNoticeReducer, IBsNotice } from './bs-notify/bs-notify.reducer';
 import { GithubEffects } from './github/github.effects';
-import { getFollowers, githubReducer, IGithub } from './github/github.reducer';
+import { githubReducer, IGithub } from './github/github.reducer';
+import { ILoader, loaderReducer } from './loader/loader.reducer';
 
 export interface IAppState {
-    github: IGithub;
+    loader: ILoader;
     bsNotice: IBsNotice;
+    github: IGithub;
 }
 
-const reducers: ActionReducerMap<IAppState> = {
-    github: githubReducer,
-    bsNotice: bsNoticeReducer
+export const reducers: ActionReducerMap<IAppState> = {
+    loader: loaderReducer,
+    bsNotice: bsNoticeReducer,
+    github: githubReducer
 };
 
 export function logger(reducer: ActionReducer<IAppState>): ActionReducer<any, any> {
@@ -44,30 +47,3 @@ export const instrumentation = !environment.production ? StoreDevtoolsModule.ins
 export const effects: ModuleWithProviders = EffectsModule.forRoot([
     GithubEffects
 ]);
-
-/**
- * A selector function is a map function factory. We pass it parameters and it
- * returns a function that maps from the larger state tree into a smaller
- * piece of state. This selector simply selects the `netflix` state.
- *
- * Selectors are used with the `select` operator.
- *
- * ```ts
- * class MyComponent {
- * 	constructor(state$: Observable<State>) {
- * 	  this.netflix$ = state$.select(getNetflixState)
- * 	}
- * }
- * ```
- */
-/**
- * Github
- */
-export const selectGithubState = (state: IAppState) => state.github;
-export const followers = createSelector(selectGithubState, getFollowers);
-
-/**
- * BS Notify
- */
-export const selectBsNoticeState = (state: IAppState) => state.bsNotice;
-export const bsNotice = createSelector(selectBsNoticeState, getBsNotice);

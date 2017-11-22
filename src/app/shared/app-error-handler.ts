@@ -2,6 +2,7 @@ import { ErrorHandler } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppError } from '@shared/errors/app-error';
 import { NotFoundError } from '@shared/errors/not-found-error';
+import { UnauthorizedError } from '@shared/errors/unauthorized';
 import { CreateNoticeAction } from '@store/bs-notify/bs-notify.actions';
 import { IAppState } from '@store/index';
 
@@ -22,8 +23,18 @@ export class AppErrorHandler implements ErrorHandler {
     handleError(error: AppError): void {
         const originalError = error.originalError;
         if (error instanceof NotFoundError) {
-            this.message = originalError ? originalError.message : 'Resource not found';
-            // this.type = 'danger';
+            this.message = (originalError && originalError.message) ?
+                originalError.message : 'Resource not found';
+        }
+
+        if (error instanceof UnauthorizedError) {
+            this.message = (originalError && originalError.message) ?
+                originalError.message : 'Authorization required';
+        }
+
+        if (error instanceof AppError) {
+            this.message = (originalError && originalError.message) ?
+                originalError.message : 'An unexpected error occurred';
         }
 
         this.notify();
@@ -31,7 +42,6 @@ export class AppErrorHandler implements ErrorHandler {
 
     private notify(): void {
         this.store.dispatch(new CreateNoticeAction({
-            icon: this.icon,
             title: this.title,
             message: this.message,
             type: this.type,

@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { BsNotice } from './bs-notify.interface';
+import { Loader } from './loader.interface';
 
 /**
  * For each action type in an action group, make a simple
@@ -11,7 +11,7 @@ import { BsNotice } from './bs-notify.interface';
  * action types in the application are unique.
  */
 export const ActionTypes = {
-  CREATE:   '[Bs-Notice] Create Bootstrap Notification',
+  TOGGLE:    '[Loader] Toggle Loader',
 };
 
 /**
@@ -21,11 +21,11 @@ export const ActionTypes = {
  *
  * See Discriminated Unions: https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
  */
-export class CreateNoticeAction implements Action {
-  type = ActionTypes.CREATE;
+export class ToggleLoaderAction implements Action {
+  type = ActionTypes.TOGGLE;
 
-  constructor(public payload: BsNotice) { }
+  constructor(public payload: Loader) { }
 }
 
 export type Actions
-  = CreateNoticeAction;
+  = ToggleLoaderAction;

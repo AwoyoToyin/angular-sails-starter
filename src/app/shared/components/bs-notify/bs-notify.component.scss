@@ -1,11 +1,12 @@
 .alert {
     width: 350px;
     padding: .7rem;
-    position: absolute;
+    position: fixed;
     z-index: 99999999999;
 }
 .top-right {
     right: 20px;
+    top: 20px;
 }
 .bottom-right {
     right: 20px;
@@ -13,6 +14,7 @@
 }
 .top-left {
     left: 20px;
+    top: 20px;
 }
 .bottom-left {
     left: 20px;
@@ -46,6 +48,7 @@ p {
     }
     .top-right, .top-left {
         top: 56px;
+        bottom: inherit;
     }
     .bottom-left, .bottom-right {
         left: 0;

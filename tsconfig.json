@@ -17,17 +17,20 @@
     ],
     "baseUrl": "src",
     "paths": {
+      "@environments/*": [
+        "environments/*"
+      ],
       "@store/*": [
         "app/store/*"
+      ],
+      "@test/*": [
+        "app/test/*"
       ],
       "@shared/*": [
         "app/shared/*"
       ],
       "@github/*": [
         "app/github/*"
-      ],
-      "@prefx": [
-        "prefx"
       ]
     }
   }
