@@ -1,15 +1,19 @@
-import 'rxjs/add/observable/interval';
-import 'rxjs/add/observable/timer';
-import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/takeUntil';
-
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BsNotice } from '@store/bs-notify/bs-notify.interface';
 import { IBsNotice } from '@store/bs-notify/bs-notify.reducer';
 import { IAppState } from '@store/index';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { interval } from 'rxjs/observable/interval';
+import { timer } from 'rxjs/observable/timer';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 import { fxArray } from '../../../../prefx';
 

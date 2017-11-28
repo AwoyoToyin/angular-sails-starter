@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { BsNotice } from './bs-notify.interface';
+import { BsNotice } from '@store/bs-notify/bs-notify.interface';
 
 /**
  * For each action type in an action group, make a simple

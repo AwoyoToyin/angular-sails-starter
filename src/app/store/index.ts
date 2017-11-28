@@ -5,10 +5,10 @@ import { ActionReducer, ActionReducerMap, MetaReducer, StoreModule } from '@ngrx
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 
-import { bsNoticeReducer, IBsNotice } from './bs-notify/bs-notify.reducer';
-import { GithubEffects } from './github/github.effects';
-import { githubReducer, IGithub } from './github/github.reducer';
-import { ILoader, loaderReducer } from './loader/loader.reducer';
+import { bsNoticeReducer, IBsNotice } from '@store/bs-notify/bs-notify.reducer';
+import { GithubEffects } from '@store/github/github.effects';
+import { githubReducer, IGithub } from '@store/github/github.reducer';
+import { ILoader, loaderReducer } from '@store/loader/loader.reducer';
 
 export interface IAppState {
     loader: ILoader;

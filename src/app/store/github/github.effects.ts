@@ -2,11 +2,10 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/switchMap';
 
 import { Injectable } from '@angular/core';
+import { FollowersService } from '@github/services/followers.service';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
+import * as actions from '@store/github/github.actions';
 import { Observable } from 'rxjs/Observable';
-
-import { FollowersService } from '../../github/services/followers.service';
-import * as actions from './github.actions';
 
 @Injectable()
 export class GithubEffects {
@@ -15,8 +14,8 @@ export class GithubEffects {
         .map(toPayload)
         .switchMap(payload => {
             return this.service.getFollowers(payload)
-                .map((followers) => new actions.GetUserFollowersSuccessAction(followers));
-                // .catch((error) => Observable.of(new actions.GetUserFollowersFailedAction(error)));
+                .map((followers) => new actions.GetUserFollowersSuccessAction(followers))
+                .catch((error) => Observable.of(new actions.GetUserFollowersFailedAction(error)));
         });
 
 

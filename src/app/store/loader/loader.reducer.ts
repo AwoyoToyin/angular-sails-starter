@@ -1,6 +1,6 @@
 import { tassign } from 'tassign';
 
-import { Actions, ActionTypes } from './loader.actions';
+import { Actions, ActionTypes } from '@store/loader/loader.actions';
 
 export interface ILoader {
     show: boolean;

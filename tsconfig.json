@@ -33,5 +33,8 @@
         "app/github/*"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "preserveWhitespaces": false
   }
 }

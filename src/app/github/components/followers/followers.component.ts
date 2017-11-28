@@ -1,14 +1,11 @@
-import 'rxjs/add/operator/switchMap';
-
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GithubFollower } from '@github/models/follower/follower.model';
 import { Github } from '@github/models/github.model';
+import { FollowersService } from '@github/services/followers.service';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-
-import { FollowersService } from '../../services/followers.service';
 
 @Component({
   // tslint:disable-next-line:component-selector

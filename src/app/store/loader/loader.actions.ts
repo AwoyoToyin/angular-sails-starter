@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Loader } from './loader.interface';
+import { Loader } from '@store/loader/loader.interface';
 
 /**
  * For each action type in an action group, make a simple

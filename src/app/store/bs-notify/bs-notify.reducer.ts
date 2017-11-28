@@ -1,7 +1,7 @@
 import { tassign } from 'tassign';
 
-import { Actions, ActionTypes } from './bs-notify.actions';
-import { BsNotice } from './bs-notify.interface';
+import { Actions, ActionTypes } from '@store/bs-notify/bs-notify.actions';
+import { BsNotice } from '@store/bs-notify/bs-notify.interface';
 
 export interface IBsNotice {
     notice: BsNotice;
